@@ -1,0 +1,38 @@
+﻿@page
+@model IndexModel
+@using System.Net.Http;
+@{
+    ViewData["Title"] = "Home page";
+}
+
+
+<h1 class="display-4">Wordle-ish</h1>
+<body>
+        <form method="post">
+        Guess: <br />
+        <input type="text" data-val="true"
+        data-val-length="Guess a 5 letter word!"
+        data-val-length-max="5" data-val-required="Please take a guess!"
+        maxlength="5" minlength ="5"
+        name="guessWord"   />
+        <input type="submit" value="Guess!"/>
+        </form>
+
+        @if (HttpMethods.IsPost(Request.Method))
+        {
+            int gameTries = Convert.ToInt32(HttpContext.Session.GetString("guess"));
+        for(int i = 1; i <= gameTries; i++)
+        {
+            string oldGame = HttpContext.Session.GetString("game" + i)!;
+            <div class="grid-container">
+            @Html.Raw(oldGame)
+            </div>
+        }
+        string guessWord = Request.Form["guessWord"]!;
+            string displayResponse = Model.theGame(guessWord);
+            <div class="grid-container">
+            @Html.Raw(displayResponse)
+            </div>
+        }
+
+</body>
