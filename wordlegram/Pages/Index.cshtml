@@ -8,19 +8,35 @@
 
 <h1 class="display-4">Wordle-ish</h1>
 <body>
+
+    
+
         <form method="post">
         Guess: <br />
         <input type="text" data-val="true"
         data-val-length="Guess a 5 letter word!"
         data-val-length-max="5" data-val-required="Please take a guess!"
-        maxlength="5" minlength ="5"
+        maxlength="5" minlength="5" autocomplete="off" autofocus="autofocus"
         name="guessWord"   />
         <input type="submit" value="Guess!"/>
         </form>
-
-        @if (HttpMethods.IsPost(Request.Method))
+    @if (HttpMethods.IsGet(Request.Method))
+    {
+         <div class="grid-container">
+        @for (int i = 1; i <= 35; i++)
         {
-            int gameTries = Convert.ToInt32(HttpContext.Session.GetString("guess"));
+           
+            <div class="square-grey"></div>
+            
+        }
+        </div>
+    }
+
+    @if (HttpMethods.IsPost(Request.Method))
+        {
+        if (!string.IsNullOrEmpty(Request.Form["guessWord"]))
+        {
+        int gameTries = Convert.ToInt32(HttpContext.Session.GetString("guess"));
         for(int i = 1; i <= gameTries; i++)
         {
             string oldGame = HttpContext.Session.GetString("game" + i)!;
@@ -34,5 +50,13 @@
             @Html.Raw(displayResponse)
             </div>
         }
+        }
+    <h2 class="topright">SCORE: @HttpContext.Session.GetString("score")</h2>
 
+    @if (Model.showNext)
+    {
+        Model.startGame();
+        <button type="button" method="post" autofocus="autofocus" onclick="location.reload(true)">Next Word!</button>
+    }
+    
 </body>
