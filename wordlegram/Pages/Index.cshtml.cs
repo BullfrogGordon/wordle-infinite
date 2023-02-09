@@ -16,7 +16,7 @@ namespace wordlegram.Pages
         public bool showNext = false;
         public void startGame()
         {
-            HttpContext.Session.SetString("guess", "0");
+
             string gameWord = wordPicker();
             HttpContext.Session.SetString("gameWord", gameWord);
             showNext = false;
@@ -55,10 +55,7 @@ namespace wordlegram.Pages
 
         public void newWord()
         {
-
-            HttpContext.Session.SetString("score", "0");
             wordPicker();
-
         }
         public void scoreKeep(int pointsToGive)
         {
@@ -132,17 +129,17 @@ namespace wordlegram.Pages
                 else if (guessNumber >= 6)
                 {
                 endGame(false, guessNumber);
-                return htmlBlob + "\nGame Over!";
+                return htmlBlob;
                 }
                 else
                 {
                 return htmlBlob;
                 }
         }
+
         public void OnGet()
         {
             HttpContext.Session.SetString("guess", "0");
-            HttpContext.Session.SetString("score", "0");
             startGame();
         }
         public void OnPost()
