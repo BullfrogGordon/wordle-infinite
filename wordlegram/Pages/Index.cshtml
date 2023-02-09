@@ -6,13 +6,16 @@
 }
 
 
-<h1 class="display-4">Wordle-ish</h1>
+<h1 class="display-4">Infinite Wordle</h1>
+<h5>Your score increases for every correct guess.</h5>
+
+<h5>If you guess wrong, you'll start over!</h5>
 <body>
 
     
 
         <form method="post">
-        Guess: <br />
+        <br />
         <input type="text" data-val="true"
         data-val-length="Guess a 5 letter word!"
         data-val-length-max="5" data-val-required="Please take a guess!"
@@ -20,16 +23,12 @@
         name="guessWord"   />
         <input type="submit" value="Guess!"/>
         </form>
+
+        <br>
+
     @if (HttpMethods.IsGet(Request.Method))
     {
-         <div class="grid-container">
-        @for (int i = 1; i <= 35; i++)
-        {
-           
-            <div class="square-grey"></div>
-            
-        }
-        </div>
+
     }
 
     @if (HttpMethods.IsPost(Request.Method))
@@ -50,13 +49,16 @@
             @Html.Raw(displayResponse)
             </div>
         }
-        }
+        string keyWord = Request.Form["guessWord"]!;
+
+    }
     <h2 class="topright">SCORE: @HttpContext.Session.GetString("score")</h2>
 
     @if (Model.showNext)
     {
         Model.startGame();
-        <button type="button" method="post" autofocus="autofocus" onclick="location.reload(true)">Next Word!</button>
+        <form>
+        <button type="submit" method="post" autofocus="autofocus" name = "guessWord" onclick="location.reload(true)">Next Word!</button>
+        </form>
     }
-    
 </body>

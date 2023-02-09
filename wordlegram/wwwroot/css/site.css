@@ -1,10 +1,13 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
+    background: #121212;
+    color: white;
 }
 
 @media (min-width: 768px) {
   html {
     font-size: 16px;
+    color: white;
   }
 }
 
@@ -18,7 +21,9 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background: #121212;
+    color: white;
 }
 
 .square,
@@ -42,7 +47,7 @@ body {
     background: #00DA3D;
 }
 .square-yellow {
-    background: #FFE459;
+    background: #FFAE42;
 }
 .square-darkgrey {
     background: #4B4B4B;
@@ -58,7 +63,7 @@ body {
 }
 .topright {
     position: absolute;
-    top: 140px;
-    right: 500px;
+    top: 230px;
+    right: 550px;
     font-size: 25px;
 }
