@@ -53,5 +53,5 @@ jobs:
         with:
           app-name: 'infinite-wordle'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_86BABDD7D04149FC89FC233332B83EA8 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_73C7AC07AFDD4213A794733DF1DC1170 }}
           package: .
